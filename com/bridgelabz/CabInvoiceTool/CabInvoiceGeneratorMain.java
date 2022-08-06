@@ -35,6 +35,7 @@ public class CabInvoiceGeneratorMain {
 		for (Ride rides : ride) {
 			System.out.println("Distance :" + rides.distance + " Km \t Time :" + rides.time + " Min.");
 		}
-		System.out.println("\nTotal Fare :" + result + " Rs.");
+		CabInvoiceSummary invoiceSummary = new CabInvoiceSummary(ride.length, result);
+		invoiceSummary.invoiceSummary();
 	}
 }
