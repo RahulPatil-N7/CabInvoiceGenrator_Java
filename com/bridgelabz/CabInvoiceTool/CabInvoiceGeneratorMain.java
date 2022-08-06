@@ -13,11 +13,28 @@ public class CabInvoiceGeneratorMain {
 		return Math.max(totalFare, MIN_FARE);
 	}
 
+	/*
+	 * This method calculates & returns total fare of multiple rides.
+	 */
+	public double calculateFare(Ride[] ride) {
+		double totalFare = 0;
+		for (Ride rides : ride) {
+			totalFare += this.calculateFare(rides.distance, rides.time);
+		}
+		return totalFare;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("************** Welcome To Cab Invoice Generator. *************\n");
 
 		CabInvoiceGeneratorMain cabInvoice = new CabInvoiceGeneratorMain();
-		double result = cabInvoice.calculateFare(3.5, 30);
-		System.out.println("Total Fare :" + result + " Rs.");
+
+		Ride[] ride = { new Ride(3.5, 30), new Ride(2.0, 15), new Ride(3.0, 25) };
+		double result = cabInvoice.calculateFare(ride);
+		System.out.println("Rides Taken ---> ");
+		for (Ride rides : ride) {
+			System.out.println("Distance :" + rides.distance + " Km \t Time :" + rides.time + " Min.");
+		}
+		System.out.println("\nTotal Fare :" + result + " Rs.");
 	}
 }
